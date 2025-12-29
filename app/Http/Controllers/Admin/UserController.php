@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Validation\Rules\Password;
 use Merlion\Components\Concerns\Admin\HasToast;
@@ -25,9 +27,13 @@ class UserController extends CrudController
         if (request()->routeIs('admin.users.show')) {
             return [
                 \Merlion\Components\Show\Grid\Text::make('name')->label('名字')->copyable(),
-                \Merlion\Components\Show\Grid\Text::make('email')->label('邮箱')->copyable()
+                \Merlion\Components\Show\Grid\Text::make('email')->label('邮箱')->copyable(),
+                \Merlion\Components\Show\Grid\Select::make('roles')->label('关联角色')->relationship('roles'),
+                \Merlion\Components\Show\Grid\Select::make('permissions')->label('关联权限')->relationship('permissions'),
             ];
         }
+        $roles = Role::pluck('name', 'id')->toArray();
+        $permissions = Permission::pluck('name', 'id')->toArray();
 
         return [
             \Merlion\Components\Form\Fields\Text::make('name')
@@ -47,7 +53,23 @@ class UserController extends CrudController
                         : ['required', Password::defaults()];
                 })
                 ->password()
-                ->required(!request()->route('user'))
+                ->required(!request()->route('user')),
+
+            \Merlion\Components\Form\Fields\Select::make('_roles')
+                ->label('关联角色')
+                ->options($roles)
+                ->value(function () {
+                    return $this->current_model?->roles->pluck('id')->toArray();
+                })
+                ->multiple(true),
+
+            \Merlion\Components\Form\Fields\Select::make('_permissions')
+                ->label('关联权限')
+                ->options($permissions)
+                ->value(function () {
+                    return $this->current_model?->permissions->pluck('id')->toArray();
+                })
+                ->multiple(true),
         ];
     }
 
@@ -62,6 +84,8 @@ class UserController extends CrudController
             \Merlion\Components\Table\Columns\Text::make('id')->label('ID')->sortable(),
             \Merlion\Components\Table\Columns\Text::make('name')->label('名字')->copyable(),
             \Merlion\Components\Table\Columns\Text::make('email')->label('邮箱')->copyable(),
+            \Merlion\Components\Table\Columns\Select::make('roles')->label('关联角色')->relationship('roles'),
+            \Merlion\Components\Table\Columns\Select::make('permissions')->label('关联权限')->relationship('permissions'),
         ];
     }
 }

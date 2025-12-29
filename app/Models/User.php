@@ -20,8 +20,19 @@ class User extends Authenticatable
             if ($user->isDirty('password')) {
                 $user->password = Hash::make($user->password);
             }
+            unset($user->_permissions);
+            unset($user->_roles);
 
             return $user;
+        });
+
+        static::saved(function (User $user) {
+            if (request()->has('_roles')) {
+                $user->roles()->sync(request()->input('_roles'));
+            }
+            if (request()->has('_permissions')) {
+                $user->permissions()->sync(request()->input('_permissions'));
+            }
         });
     }
 
