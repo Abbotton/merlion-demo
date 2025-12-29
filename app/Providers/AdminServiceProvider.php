@@ -2,17 +2,24 @@
 
 namespace App\Providers;
 
+use App\Form\Fields\ColorCheckbox;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Merlion\AdminProvider;
+use Merlion\Components\Form\Fields\Field;
 use Merlion\Components\Layouts\Admin;
 use Merlion\Components\Menu;
 
 class AdminServiceProvider extends AdminProvider
 {
+    public function boot(): void
+    {
+        Field::$fieldsMap['colorCheckbox'] = ColorCheckbox::class;
+    }
+
     public function admin(Admin $admin): Admin
     {
         $admin->brandName = 'Merlion Demo';
