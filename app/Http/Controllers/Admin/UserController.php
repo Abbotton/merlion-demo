@@ -47,6 +47,7 @@ class UserController extends CrudController
                         : ['required', Password::defaults()];
                 })
                 ->password()
+                ->required(!request()->route('user'))
         ];
     }
 
