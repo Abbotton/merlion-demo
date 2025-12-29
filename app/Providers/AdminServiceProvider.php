@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Merlion\AdminProvider;
 use Merlion\Components\Layouts\Admin;
@@ -19,6 +20,7 @@ class AdminServiceProvider extends AdminProvider
         return $admin
             ->id('admin')
             ->default()
+            ->home(Dashboard::class)
             ->authenticatedRoutes(function () {
                 return [
                     Route::resource('users', UserController::class),
