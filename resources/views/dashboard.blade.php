@@ -1,7 +1,9 @@
 <h2 class="page-title mb-4">仪表盘</h2>
 
-
 <div class="card">
+    <div class="card-header">
+        当前用户角色：{{auth()->user()->roles->pluck('name')->implode(',')}}
+    </div>
     <div class="card-body">
         <div class="btn-list">
             <a href="https://github.com/abbotton/merlion-demo" class="btn btn-5" target="_blank" rel="noreferrer">

@@ -36,7 +36,8 @@ class AdminServiceProvider extends AdminProvider
                         Route::resource('roles', RoleController::class);
                         Route::resource('permissions', PermissionController::class);
                     }),
-                    Route::resource('posts', PostController::class)->middleware('role:管理员|编辑'),
+                    Route::resource('posts', PostController::class)
+                        ->middleware(['role:管理员|编辑', 'permission:文章.*']),
                 ];
             })
             ->menus([
