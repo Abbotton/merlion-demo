@@ -15,15 +15,13 @@
         <div class="mt-4">
 <pre lang="php">
     <code>
-        // 自定义表单组件为ColorCheckbox
+        // 自定义表单组件为Radio
         // 用法：
-        use App\Form\Fields\ColorCheckbox;
+        use App\Form\Fields\Radio;
 
-        ColorCheckbox::make('color')
-            ->label('颜色')
-            ->colors(['primary', 'secondary', 'success', 'danger', 'warning', 'info'])
-            ->checked(['primary', 'success']) // 选中色
-            ->lightColors(['light', 'warning']), // 浅色选中
+        Radio::make('status')
+            ->label('状态')
+            ->options(['异常’, '正常'])
     </code>
 </pre>
         </div>

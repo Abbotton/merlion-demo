@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Form\Fields\ColorCheckbox;
+use App\Form\Fields\Radio;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
@@ -18,7 +18,7 @@ class AdminServiceProvider extends AdminProvider
 {
     public function boot(): void
     {
-        Field::$fieldsMap['colorCheckbox'] = ColorCheckbox::class;
+        Field::$fieldsMap['radio'] = Radio::class;
     }
 
     public function admin(Admin $admin): Admin

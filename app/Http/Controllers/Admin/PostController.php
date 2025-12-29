@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Form\Fields\Radio;
 use App\Models\Post;
 use Merlion\Http\Controllers\CrudController;
 
@@ -30,6 +31,7 @@ class PostController extends CrudController
                 ->label('标题')
                 ->rules('required|unique:posts,title,'.request()->route('post'))
                 ->required(),
+            Radio::make('status')->label('状态')->options(['未上架', '已上架']),
             \Merlion\Components\Form\Fields\Textarea::make('body')
                 ->email()
                 ->label('正文')
