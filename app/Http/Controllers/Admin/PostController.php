@@ -19,7 +19,7 @@ class PostController extends CrudController
                 \Merlion\Components\Show\Grid\Text::make('title')->label('标题')->copyable(),
                 \Merlion\Components\Show\Grid\Text::make('status')
                     ->label('状态')
-                    ->displayValueUsing(fn() => $this->formatStatus($this->current_model->status)),
+                    ->displayValueUsing(fn () => $this->formatStatus($this->current_model->status)),
                 \Merlion\Components\Show\Grid\Text::make('created_at')->label('创建时间'),
                 \Merlion\Components\Show\Grid\Text::make('updated_at')->label('更新时间'),
                 \Merlion\Components\Show\Grid\Text::make('body')->label('正文'),
@@ -59,7 +59,7 @@ class PostController extends CrudController
             \Merlion\Components\Table\Columns\Text::make('title')->label('标题')->copyable(),
             \Merlion\Components\Table\Columns\Text::make('status')
                 ->label('状态')
-                ->displayValueUsing(fn($text) => $this->formatStatus($text->getModel()->status)),
+                ->displayValueUsing(fn ($text) => $this->formatStatus($text->getModel()->status)),
             \Merlion\Components\Table\Columns\Text::make('created_at')->label('创建时间')->sortable(),
             \Merlion\Components\Table\Columns\Text::make('updated_at')->label('修改时间')->sortable(),
         ];

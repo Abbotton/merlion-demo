@@ -28,7 +28,7 @@ class PermissionController extends CrudController
         return [
             \Merlion\Components\Form\Fields\Text::make('name')
                 ->label('权限名称')
-                ->rules('required|unique:permissions,name,' . request()->route('permission'))
+                ->rules('required|unique:permissions,name,'.request()->route('permission'))
                 ->required(),
 
             \Merlion\Components\Form\Fields\Select::make('_roles')
@@ -45,7 +45,7 @@ class PermissionController extends CrudController
                 ->value(function () {
                     return $this->current_model?->users->pluck('id')->toArray();
                 })
-                ->multiple(true)
+                ->multiple(true),
         ];
     }
 

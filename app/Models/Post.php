@@ -11,17 +11,17 @@ class Post extends Model
         'title',
         'body',
         'user_id',
-        'status'
+        'status',
     ];
 
     protected static function booted(): void
     {
         static::saving(function (Post $post) {
             $post->user_id = auth()->id();
+
             return $post;
         });
     }
-
 
     public function user(): BelongsTo
     {

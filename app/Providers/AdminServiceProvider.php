@@ -41,10 +41,10 @@ class AdminServiceProvider extends AdminProvider
                 ];
             })
             ->menus([
-                (new Menu())->label('用户管理')->icon('ti ti-users-group')->link(url('/admin/users')),
-                (new Menu())->label('角色管理')->icon('ti ti-user-circle')->link(url('/admin/roles')),
-                (new Menu())->label('权限管理')->icon('ti ti-lock')->link(url('/admin/permissions')),
-                (new Menu())->label('文章管理')->icon('ti ti-list')->link(url('/admin/posts'))
+                (new Menu)->label('用户管理')->icon('ti ti-users-group')->link(url('/admin/users')),
+                (new Menu)->label('角色管理')->icon('ti ti-user-circle')->link(url('/admin/roles')),
+                (new Menu)->label('权限管理')->icon('ti ti-lock')->link(url('/admin/permissions')),
+                (new Menu)->label('文章管理')->icon('ti ti-list')->link(url('/admin/posts')),
             ])
             ->path('admin');
     }

@@ -43,7 +43,7 @@ class UserController extends CrudController
             \Merlion\Components\Form\Fields\Text::make('email')
                 ->email()
                 ->label('邮箱')
-                ->rules('required|email|unique:users,email,' . request()->route('user'))
+                ->rules('required|email|unique:users,email,'.request()->route('user'))
                 ->required(),
             \Merlion\Components\Form\Fields\Text::make('password')
                 ->label('密码')
@@ -53,7 +53,7 @@ class UserController extends CrudController
                         : ['required', Password::defaults()];
                 })
                 ->password()
-                ->required(!request()->route('user')),
+                ->required(! request()->route('user')),
 
             \Merlion\Components\Form\Fields\Select::make('_roles')
                 ->label('关联角色')
