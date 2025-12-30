@@ -16,11 +16,11 @@ class Permission extends BasePermission
         });
 
         static::saved(function (Permission $permission) {
-            if (request()->has('_roles')) {
-                $permission->roles()->sync(request()->input('_roles'));
+            if (request()->filled('_roles')) {
+                $permission->roles()->sync(request()->input('_roles', []));
             }
-            if (request()->has('_users')) {
-                $permission->users()->sync(request()->input('_users'));
+            if (request()->filled('_users')) {
+                $permission->users()->sync(request()->input('_users', []));
             }
         });
     }

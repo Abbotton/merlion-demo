@@ -49,11 +49,11 @@ class User extends Authenticatable
         });
 
         static::saved(function (User $user) {
-            if (request()->has('_roles')) {
-                $user->roles()->sync(request()->input('_roles'));
+            if (request()->filled('_roles')) {
+                $user->roles()->sync(request()->input('_roles', []));
             }
-            if (request()->has('_permissions')) {
-                $user->permissions()->sync(request()->input('_permissions'));
+            if (request()->filled('_permissions')) {
+                $user->permissions()->sync(request()->input('_permissions', []));
             }
         });
     }

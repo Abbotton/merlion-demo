@@ -16,11 +16,11 @@ class Role extends BaseRole
         });
 
         static::saved(function (Role $role) {
-            if (request()->has('_permissions')) {
-                $role->permissions()->sync(request('_permissions'));
+            if (request()->filled('_permissions')) {
+                $role->permissions()->sync(request('_permissions', []));
             }
-            if (request()->has('_users')) {
-                $role->users()->sync(request('_users'));
+            if (request()->filled('_users')) {
+                $role->users()->sync(request('_users', []));
             }
         });
     }
