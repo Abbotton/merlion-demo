@@ -31,7 +31,12 @@ class PostController extends CrudController
                 ->label('标题')
                 ->rules('required|unique:posts,title,'.request()->route('post'))
                 ->required(),
-            Radio::make('status')->label('状态')->options(['未上架', '已上架']),
+            Radio::make('status')
+                ->label('状态')
+                ->required()
+                ->checked(0)
+                ->rules('required|boolean')
+                ->options(['未发布', '已发布']),
             \Merlion\Components\Form\Fields\Textarea::make('body')
                 ->email()
                 ->label('正文')
@@ -43,8 +48,8 @@ class PostController extends CrudController
     private function formatStatus(bool $status)
     {
         return $status
-            ? '<span class="badge bg-green text-green-fg">已上架</span>'
-            : '<span class="badge bg-red text-red-fg">已下架</span>';
+            ? '<span class="badge bg-green text-green-fg">已发布</span>'
+            : '<span class="badge bg-red text-red-fg">未发布</span>';
     }
 
     protected function searches(): array
